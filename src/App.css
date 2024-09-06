@@ -1,38 +1,100 @@
+/* General Styles */
 .App {
   text-align: center;
+  font-family: 'Arial', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Hero Section */
+.hero {
+  background-color: #ffcc00;
+  padding: 50px 20px;
+  text-align: center;
+}
+.hero-content img{
+  border-radius: 50%;
+}
+.hero-title {
+  font-size: 3rem;
+  color: white;
+  margin-bottom: 20px;
+}
+.glow-effect {
+  width: 150px;
+  animation: glowing 2s infinite;
+}
+.cta-button {
+  background-color: #ff4500;
+  color: white;
+  padding: 15px 30px;
+  margin-left: 40px;
+  margin-top: 20px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+.cta-button:hover {
+  transform: scale(1.1);
+  background-color: #d54a31;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Body Section */
+.body-section {
+  padding: 50px 20px;
+  background-color: #f4f4f4;
+}
+.services {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+.service {
+  width: 250px;
+  height: 250px;
+  text-align: center;
+  padding-top: 20px;
+  
+}
+.service img {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* CTA Form */
+.cta-form {
+  background-color: #fff;
+  padding: 50px 20px;
+  margin-top: 30px;
+}
+.cta-form form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.cta-form input, .cta-form select {
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+}
+.cta-form button {
+  margin-top: 20px;
+  margin-left: 4px;
 }
 
-.App-link {
-  color: #61dafb;
+@keyframes glowing {
+  0% { box-shadow: 0 0 5px #fff; }
+  50% { box-shadow: 0 0 20px #ffcc00; }
+  100% { box-shadow: 0 0 5px #fff; }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* Responsive */
+@media (max-width: 768px) {
+  .services {
+    flex-direction: column;
   }
-  to {
-    transform: rotate(360deg);
+  .service {
+    margin-bottom: 20px;
   }
 }
