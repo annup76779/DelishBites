@@ -80,13 +80,13 @@ WSGI_APPLICATION = 'delishbites_backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'delishbites',
-        'USER': 'root',
-        'PASSWORD': 'bindass#@76779',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "delishbites",
+        "USER": "root",
+        "PASSWORD": "8Ctz:U6wNZ3>",
+        "HOST": "localhost",
+        "PORT": "3306"
+  }
 }
 
 
