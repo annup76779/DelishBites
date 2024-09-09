@@ -7,7 +7,7 @@ class Order(models.Model):
         ('lunch', 'Lunch'),
         ('dinner', 'Dinner'),
     ]
-    
+
     name = models.CharField(max_length=255)
     email = models.EmailField()
     phone = models.CharField(max_length=20)

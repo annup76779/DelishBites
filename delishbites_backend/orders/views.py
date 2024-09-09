@@ -1,15 +1,18 @@
-from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
+from rest_framework import status, permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from orders.serializers import OrderSerializer
+
 
 # Create your views here.
-from rest_framework import status
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from .models import Order
-from .serializers import OrderSerializer
+@method_decorator(csrf_protect, name="dispatch")
+class SaveNewOrder(APIView):
+    permission_classes = [permissions.AllowAny]
 
-@api_view(['POST'])
-def submit_order(request):
-    if request.method == 'POST':
+    def post(self, request):
         serializer = OrderSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

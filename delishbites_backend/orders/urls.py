@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import submit_order
+
+from orders.views import SaveNewOrder
 
 urlpatterns = [
-    path('submit-order', submit_order, name='submit-order'),
+    path("submit-form", SaveNewOrder.as_view(), name="submit-form"),
 ]

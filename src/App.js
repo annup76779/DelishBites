@@ -36,14 +36,18 @@ function App() {
             alert("Please enter a valid email");
         } else {
             try {
+                const myHeaders = new Headers();
+                let csrftoken = getCookie("csrftoken");
+                console.log(csrftoken);
+                myHeaders.append("X-CSRFToken", csrftoken);
+                myHeaders.append("Content-Type", "application/json");
+
                 const response = await fetch(
                     "http://localhost:8000/orders/submit-form",
                     {
                         method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRFToken": getCookie("csrftoken"),
-                        },
+                        headers: myHeaders,
+                        credentials: "include",
                         body: JSON.stringify(formData),
                     }
                 );
