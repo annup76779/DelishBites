@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
 
 function App() {
-    //backend part
-
-    //
     const [formData, setFormData] = useState({
         name: "",
         email: "",
         phone: "",
         meal: "",
     });
+
+    // Ref to the form section
+    const formRef = useRef(null);
+
     const [message, setMessage] = useState({
         type: "success",
         message: "some Message",
@@ -20,10 +21,23 @@ function App() {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    //connection backend to fruntend
+    // csrfToken.js
+    function getCSRFToken() {
+        let csrfToken = null;
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            if (cookie.trim().startsWith('csrftoken=')) {
+                csrfToken = cookie.split('=')[1];
+            }
+        }
+        return csrfToken;
+    }
+
+    //Function to handle form submission
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email)) {
             alert("Please enter a valid email");
@@ -35,6 +49,7 @@ function App() {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
+                            'X-CSRFToken': getCSRFToken(),
                         },
                         body: JSON.stringify(formData),
                     }
@@ -54,6 +69,11 @@ function App() {
         }
     };
 
+    // Function to scroll to the form when "Order Now" is clicked
+    const scrollToForm = () => {
+        formRef.current.scrollIntoView({ behavior: 'smooth' });
+    };
+
     return (
         <div className="App">
             {/* Hero Section */}
@@ -65,7 +85,7 @@ function App() {
                         alt="DelishBites Logo"
                         className="glow-effect"
                     />
-                    <button className="cta-button">Order Now</button>
+                    <button className="cta-button" onClick={scrollToForm}>Order Now</button>
                 </div>
             </section>
 
@@ -89,7 +109,7 @@ function App() {
             </section>
 
             {/* CTA Form */}
-            <section className="cta-form">
+            <section className="cta-form" id="form" ref={formRef}>
                 <h2>Book a Table or Order Now</h2>
                 <form onSubmit={handleSubmit}>
                     <input
